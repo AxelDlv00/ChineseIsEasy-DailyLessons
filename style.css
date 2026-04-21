@@ -290,3 +290,47 @@ h1, h2, h3, h4, .sidebar, .markdown-body {
     
     .markdown-body h1 { font-size: 2em; }
 }
+
+/* --- MISE EN PAGE CÔTE À CÔTE (Image + Vocabulaire) --- */
+.lesson-header-layout {
+    display: flex;
+    align-items: flex-start;
+    gap: 40px;
+    margin-top: 20px;
+    margin-bottom: 40px;
+}
+
+.layout-left {
+    flex: 1;
+    min-width: 250px;
+}
+
+.layout-right {
+    flex: 1.5;
+    min-width: 0; /* Indispensable pour empêcher le tableau de casser la largeur */
+}
+
+/* On écrase les marges par défaut pour un alignement parfait en haut */
+.lesson-header-layout .custom-image-wrapper {
+    margin: 0;
+}
+
+.lesson-header-layout h2 {
+    margin-top: 0;
+    margin-bottom: 15px;
+}
+
+.lesson-header-layout table {
+    margin-top: 0;
+}
+
+/* Sur mobile, on remet tout l'un en dessous de l'autre */
+@media (max-width: 768px) {
+    .lesson-header-layout {
+        flex-direction: column;
+        gap: 20px;
+    }
+    .layout-left, .layout-right {
+        width: 100%;
+    }
+}

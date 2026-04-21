@@ -95,6 +95,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             
             // Injecter le HTML généré
             mdContent.innerHTML = marked.parse(markdown);
+            organizeLayout();
             
             welcomeMessage.classList.add('hidden');
             lessonContainer.classList.remove('hidden');
@@ -105,6 +106,40 @@ document.addEventListener('DOMContentLoaded', async () => {
         } catch (error) {
             console.error(error);
             lessonContainer.innerHTML = `<div style="color:red; padding: 20px;">Erreur : Impossible de charger le fichier <b>${filepath}</b>.</div>`;
+        }
+    }
+
+    // Fonction qui capture l'image et le tableau pour les mettre côte à côte
+    function organizeLayout() {
+        const content = document.getElementById('md-content');
+        
+        // On cherche la première image, le titre "Vocabulaire", et le premier tableau
+        const imageWrapper = content.querySelector('.custom-image-wrapper');
+        const vocabHeader = Array.from(content.querySelectorAll('h2')).find(h => h.textContent.includes('Vocabulaire'));
+        const table = content.querySelector('table');
+        
+        // Si la page contient bien une image et un tableau, on les met en grille
+        if (imageWrapper && table) {
+            const flexContainer = document.createElement('div');
+            flexContainer.className = 'lesson-header-layout';
+            
+            // On insère notre nouvelle structure juste à l'endroit où était l'image
+            imageWrapper.parentNode.insertBefore(flexContainer, imageWrapper);
+            
+            // Colonne de gauche (Image)
+            const leftCol = document.createElement('div');
+            leftCol.className = 'layout-left';
+            leftCol.appendChild(imageWrapper);
+            
+            // Colonne de droite (Titre + Tableau)
+            const rightCol = document.createElement('div');
+            rightCol.className = 'layout-right';
+            if (vocabHeader) rightCol.appendChild(vocabHeader);
+            rightCol.appendChild(table);
+            
+            // On assemble le tout
+            flexContainer.appendChild(leftCol);
+            flexContainer.appendChild(rightCol);
         }
     }
 
