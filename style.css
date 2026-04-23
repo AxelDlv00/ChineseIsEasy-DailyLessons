@@ -226,20 +226,22 @@ h1, h2, h3, h4, .sidebar, .markdown-body {
     padding: 0;
 }
 
-/* Tableaux stylisés */
+/* Tableaux stylisés et condensés */
 .markdown-body table {
     width: 100%;
     border-collapse: collapse;
-    margin: 2em 0;
+    margin: 1.5em 0; /* Réduit un peu la marge extérieure */
     border-radius: 8px;
     overflow: hidden;
     box-shadow: 0 0 0 1px var(--border-color);
+    font-size: 0.95rem; /* Optionnel : réduit légèrement la taille du texte pour gagner de la place */
 }
 
 .markdown-body th, .markdown-body td {
-    padding: 12px 15px;
+    padding: 6px 12px; /* Réduit de 12px/15px à 6px/12px */
     text-align: left;
     border-bottom: 1px solid var(--border-color);
+    line-height: 1.0;  /* Force une hauteur de ligne plus courte que le reste du texte (1.8) */
 }
 
 .markdown-body th {
